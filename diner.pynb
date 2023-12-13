@@ -1,0 +1,33 @@
+count = 0
+last_open_seat = None
+
+for num in range(1, N + 1):
+    is_seat_taken = False
+
+    for x in S:
+        lower = x - K
+        upper = x + K
+
+        if num >= lower and num <= upper:
+            print(f"Seat {num} is taken")
+            is_seat_taken = True
+            break
+
+    if not is_seat_taken:
+        if last_open_seat is not None:
+            lower_open = last_open_seat - K
+            upper_open = last_open_seat + K
+
+            if num >= lower_open and num <= upper_open:
+                print(f"Seat {num} is within {K} of the last open seat ({last_open_seat})")
+                is_seat_taken = True
+            else:
+                print(f"Seat {num} is open")
+                count += 1
+                last_open_seat = num
+        else:
+            print(f"Seat {num} is open")
+            count += 1
+            last_open_seat = num
+
+print(f"Total open seats: {count}"
